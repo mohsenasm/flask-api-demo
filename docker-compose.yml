@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+    app:
+        build: './app'
+        restart: always
+        ports:
+            - 7654:7654
+        # we should use something like `wait-for-it.sh` in real life
+
+    db:
+        image: 'postgres:13-alpine'
+        environment:
+            POSTGRES_DB: 'the_db'
+            POSTGRES_USER: 'postgres'
+            POSTGRES_PASSWORD: 'the_pass'
+        expose:
+            - 5432
+        volumes:
+            - db_data:/var/lib/postgresql/data
+
+volumes:
+    db_data:
