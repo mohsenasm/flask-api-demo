@@ -20,7 +20,7 @@ class MessageSchema(ma.Schema):
 
 
 class Car(MethodResource, Resource):
-    @marshal_with(CarSchema(many=True), code=200)
+    @marshal_with(CarSchema(many=True), code=200)  # output list of `CarSchema`s
     def get(self):
         cars = CarsModel.query.all()
         return [
@@ -29,8 +29,8 @@ class Car(MethodResource, Resource):
                 "doors": car.doors
             } for car in cars]
 
-    @use_kwargs(CarSchema)
-    @marshal_with(MessageSchema, code=200)
+    @use_kwargs(CarSchema)  # input CarSchema
+    @marshal_with(MessageSchema, code=200)  # output MessageSchema
     def post(self, **kwargs):
         if any(param not in kwargs for param in ["name", "doors"]):
             return {"message": "missed an argument"}, 400
