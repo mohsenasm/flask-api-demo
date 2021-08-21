@@ -8,7 +8,7 @@
   - Serving Documentation
   - Run Examples in the Browser
 + SqlAlchemy ORM
-+ Deply with Docker
++ Deploy with Docker
 
 ## Test
     docker-compose -f test-docker-compose.yml up --build
