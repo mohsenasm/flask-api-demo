@@ -1,5 +1,5 @@
-from flask_restful import Resource
-from flask_apispec import MethodResource, marshal_with, use_kwargs
+from flask_restful import Resource, request
+from flask_apispec import MethodResource, marshal_with, use_kwargs, doc
 import marshmallow as ma
 
 from models import db, CarsModel
@@ -38,4 +38,11 @@ class Car(MethodResource, Resource):
         db.session.add(new_car)
         db.session.commit()
         return {"message": f"car {new_car.name} has been created successfully."}
+
+
+class CarByName(MethodResource, Resource):
+    @doc(params={'pet_id': {'description': 'pet id', 'in': 'header'}})
+    @use_kwargs(CarSchema, location='query')  # input CarSchema
+    def get(self, **kwargs):
+        return request.headers["pet_id"]
 

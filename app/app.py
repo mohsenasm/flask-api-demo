@@ -5,6 +5,8 @@ from flask_apispec import FlaskApiSpec
 from resources import HelloWorld, Car
 from models import db
 
+from resources import CarByName
+
 
 def create_app():
     app = Flask(__name__)
@@ -26,14 +28,16 @@ def create_app():
     api = Api(app)
     api.add_resource(HelloWorld, '/')
     api.add_resource(Car, '/car')
+    api.add_resource(CarByName, '/car_by_name')
 
     # Spec (/swagger & /swagger-ui)
     docs = FlaskApiSpec(app)
     docs.register(Car)
+    docs.register(CarByName)
 
     return app
 
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(port=7654, host='0.0.0.0')
+    app.run(port=7654, host='0.0.0.0', debug=True)
