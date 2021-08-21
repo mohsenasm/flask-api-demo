@@ -8,6 +8,7 @@
   - Serving Documentation
   - Run Examples in the Browser
 + SqlAlchemy ORM
++ Run Testcases in Docker (so you can run them in CI/CD)
 + Deploy with Docker
 
 ## Test
